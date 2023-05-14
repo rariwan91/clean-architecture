@@ -3,6 +3,7 @@ import { IDeleteTaskInputBoundary } from "../../use-cases/delete-task/IDeleteTas
 import { IEditTaskInputBoundary } from "../../use-cases/edit-task/IEditTaskInputBoundary";
 import { ILoadTasksInputBoundary } from "../../use-cases/load-tasks/ILoadTasksInputBoundary";
 import { IMoveTaskInputBoundary } from "../../use-cases/move-task/IMoveTaskInputBoundary";
+import { IToggleTaskCompletionInputBoundary } from "../../use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
 
 export class TasksController {
     constructor(
@@ -10,7 +11,8 @@ export class TasksController {
         private addTaskInputBoundary: IAddTaskInputBoundary,
         private editTaskInputBoundary: IEditTaskInputBoundary,
         private deleteTaskInputBoundary: IDeleteTaskInputBoundary,
-        private moveTaskInputBoundary: IMoveTaskInputBoundary) { }
+        private moveTaskInputBoundary: IMoveTaskInputBoundary,
+        private toggleTaskCompletionInputBoundary: IToggleTaskCompletionInputBoundary) { }
 
     loadTasks(): void {
         this.loadTasksInputBoundary.loadTasks();
@@ -30,5 +32,9 @@ export class TasksController {
 
     moveTask(taskId: number, direction: 'Up' | 'Down'): void {
         this.moveTaskInputBoundary.moveTask(taskId, direction);
+    }
+
+    toggleTask(taskId: number): void {
+        this.toggleTaskCompletionInputBoundary.toggleTaskCompletion(taskId);
     }
 }

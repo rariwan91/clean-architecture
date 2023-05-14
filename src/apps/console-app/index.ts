@@ -84,9 +84,10 @@ function moveTask(): void {
 
 function toggleTaskCompletion(): void {
     let taskNumber = rl.question('Which task number? ');
-    console.log(`task number: ${taskNumber}`);
 
     let taskId = parseInt(taskNumber);
+
+    tasksController.toggleTask(taskId);
 }
 
 function getDirection(): 'Up' | 'Down' {

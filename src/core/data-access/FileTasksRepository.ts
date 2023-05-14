@@ -83,6 +83,20 @@ export class TasksFileRepository implements ITasksRepository {
         this.saveTasks();
     }
 
+    toggleTaskCompletion(taskId: number): void {
+        let doesTaskExist = this.tasks.some((task) => task.TaskId === taskId);
+
+        if (!doesTaskExist) {
+            throw new Error(`TaskId ${taskId} doesn't exist.`);
+        }
+
+        let taskIndex = this.tasks.findIndex((task) => task.TaskId === taskId);
+
+        this.tasks[taskIndex].IsComplete = !this.tasks[taskIndex].IsComplete;
+
+        this.saveTasks();
+    }
+
     /**
      * Load tasks from the data/tasks.json file.
      * Creates the file if it doesn't exist.
