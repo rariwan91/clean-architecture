@@ -35,11 +35,11 @@ export class TasksFileRepository implements ITasksRepository {
     }
 
     addTask(newTask: Task): void {
-        const maxTaskId = Math.max(...this.tasks.map((task) => task.TaskId));
-        const maxOrder = Math.max(...this.tasks.map((task) => task.Order));
+        const maxTaskIdTask = this.tasks.reduce((prevTask, currentTask) => prevTask.TaskId > currentTask.TaskId ? prevTask : currentTask);
+        const maxOrderTask = this.tasks.reduce((prevTask, currentTask) => prevTask.Order > currentTask.Order ? prevTask : currentTask);
 
-        newTask.TaskId = maxTaskId + 1;
-        newTask.Order = maxOrder + 1;
+        newTask.TaskId = maxTaskIdTask.TaskId + 1;
+        newTask.Order = maxOrderTask.Order + 1;
 
         this.tasks.push(newTask);
 

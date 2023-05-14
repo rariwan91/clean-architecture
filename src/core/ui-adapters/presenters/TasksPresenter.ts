@@ -13,6 +13,7 @@ export class TasksPresenter implements ILoadTasksOutputBoundary,
         let results = tasks.map((task) => new TaskViewModel(task.TaskId, task.Text, task.IsComplete, task.Order));
         console.clear();
         console.log('To-Do List Application');
+        console.log();
 
         results.forEach(task => {
             let line = `[${task.TaskId}] - ${task.Text}`;
