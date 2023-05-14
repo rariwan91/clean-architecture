@@ -1,25 +1,25 @@
-import { AddTaskUseCaseInteractor } from "../use-cases/add-task/AddTaskUseCaseInteractor";
-import { DeleteTaskUseCaseInteractor } from "../use-cases/delete-task/DeleteTaskUseCaseInteractor";
-import { EditTaskUseCaseInteractor } from "../use-cases/edit-task/EditTaskUseCaseInteractor";
-import { IAddTaskInputBoundary } from "../use-cases/add-task/IAddTaskInputBoundary";
-import { IAddTaskOutputBoundary } from "../use-cases/add-task/IAddTaskOutputBoundary";
-import { IDeleteTaskInputBoundary } from "../use-cases/delete-task/IDeleteTaskInputBoundary";
-import { IDeleteTaskOutputBoundary } from "../use-cases/delete-task/IDeleteTaskOutputBoundary";
-import { IEditTaskInputBoundary } from "../use-cases/edit-task/IEditTaskInputBoundary";
-import { IEditTaskOutputBoundary } from "../use-cases/edit-task/IEditTaskOutputBoundary";
-import { ILoadTasksInputBoundary } from "../use-cases/load-tasks/ILoadTasksInputBoundary";
-import { ILoadTasksOutputBoundary } from "../use-cases/load-tasks/ILoadTasksOutputBoundary";
-import { IMoveTaskInputBoundary } from "../use-cases/move-task/IMoveTaskInputBoundary";
-import { IMoveTaskOutputBoundary } from "../use-cases/move-task/IMoveTaskOutputBoundary";
-import { ITasksRepository } from "../use-cases/data-access/ITasksRepository";
-import { IToggleTaskCompletionInputBoundary } from "../use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
-import { IToggleTaskCompletionOutputBoundary } from "../use-cases/toggle-task-completion/IToggleTaskCompletionOutputBoundary";
-import { LoadTasksUseCaseInteractor } from "../use-cases/load-tasks/LoadTasksUseCaseInteractor";
-import { MoveTaskUseCaseInteractor } from "../use-cases/move-task/MoveTaskUseCaseInteractor";
+import { AddTaskUseCaseInteractor } from "../../../core/use-cases/add-task/AddTaskUseCaseInteractor";
+import { DeleteTaskUseCaseInteractor } from "../../../core/use-cases/delete-task/DeleteTaskUseCaseInteractor";
+import { EditTaskUseCaseInteractor } from "../../../core/use-cases/edit-task/EditTaskUseCaseInteractor";
+import { IAddTaskInputBoundary } from "../../../core/use-cases/add-task/IAddTaskInputBoundary";
+import { IAddTaskOutputBoundary } from "../../../core/use-cases/add-task/IAddTaskOutputBoundary";
+import { IDeleteTaskInputBoundary } from "../../../core/use-cases/delete-task/IDeleteTaskInputBoundary";
+import { IDeleteTaskOutputBoundary } from "../../../core/use-cases/delete-task/IDeleteTaskOutputBoundary";
+import { IEditTaskInputBoundary } from "../../../core/use-cases/edit-task/IEditTaskInputBoundary";
+import { IEditTaskOutputBoundary } from "../../../core/use-cases/edit-task/IEditTaskOutputBoundary";
+import { ILoadTasksInputBoundary } from "../../../core/use-cases/load-tasks/ILoadTasksInputBoundary";
+import { ILoadTasksOutputBoundary } from "../../../core/use-cases/load-tasks/ILoadTasksOutputBoundary";
+import { IMoveTaskInputBoundary } from "../../../core/use-cases/move-task/IMoveTaskInputBoundary";
+import { IMoveTaskOutputBoundary } from "../../../core/use-cases/move-task/IMoveTaskOutputBoundary";
+import { ITasksRepository } from "../../../core/use-cases/data-access/ITasksRepository";
+import { IToggleTaskCompletionInputBoundary } from "../../../core/use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
+import { IToggleTaskCompletionOutputBoundary } from "../../../core/use-cases/toggle-task-completion/IToggleTaskCompletionOutputBoundary";
+import { LoadTasksUseCaseInteractor } from "../../../core/use-cases/load-tasks/LoadTasksUseCaseInteractor";
+import { MoveTaskUseCaseInteractor } from "../../../core/use-cases/move-task/MoveTaskUseCaseInteractor";
 import { TasksController } from "../ui-adapters/controllers/TasksController";
-import { TasksFileRepository } from "../data-access/FileTasksRepository";
+import { TasksFlatFileRepository } from "../../../data-access/flat-file/TasksFlatFileRepository";
 import { TasksPresenter } from "../ui-adapters/presenters/TasksPresenter";
-import { ToggleTaskCompletionUseCaseInteractor } from "../use-cases/toggle-task-completion/ToggleTaskCompletionUseCaseInteractor";
+import { ToggleTaskCompletionUseCaseInteractor } from "../../../core/use-cases/toggle-task-completion/ToggleTaskCompletionUseCaseInteractor";
 
 export class DependencyInjector {
     // Input Boundaries
@@ -45,7 +45,7 @@ export class DependencyInjector {
     tasksController: TasksController;
 
     constructor() {
-        this.tasksRepository = new TasksFileRepository();
+        this.tasksRepository = new TasksFlatFileRepository();
 
         const tasksPresenter = new TasksPresenter();
         this.loadTasksOutputBoundary = tasksPresenter;

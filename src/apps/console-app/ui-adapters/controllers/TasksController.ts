@@ -1,9 +1,9 @@
-import { IAddTaskInputBoundary } from "../../use-cases/add-task/IAddTaskInputBoundary";
-import { IDeleteTaskInputBoundary } from "../../use-cases/delete-task/IDeleteTaskInputBoundary";
-import { IEditTaskInputBoundary } from "../../use-cases/edit-task/IEditTaskInputBoundary";
-import { ILoadTasksInputBoundary } from "../../use-cases/load-tasks/ILoadTasksInputBoundary";
-import { IMoveTaskInputBoundary } from "../../use-cases/move-task/IMoveTaskInputBoundary";
-import { IToggleTaskCompletionInputBoundary } from "../../use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
+import { IAddTaskInputBoundary } from "../../../../core/use-cases/add-task/IAddTaskInputBoundary";
+import { IDeleteTaskInputBoundary } from "../../../../core/use-cases/delete-task/IDeleteTaskInputBoundary";
+import { IEditTaskInputBoundary } from "../../../../core/use-cases/edit-task/IEditTaskInputBoundary";
+import { ILoadTasksInputBoundary } from "../../../../core/use-cases/load-tasks/ILoadTasksInputBoundary";
+import { IMoveTaskInputBoundary } from "../../../../core/use-cases/move-task/IMoveTaskInputBoundary";
+import { IToggleTaskCompletionInputBoundary } from "../../../../core/use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
 
 export class TasksController {
     constructor(

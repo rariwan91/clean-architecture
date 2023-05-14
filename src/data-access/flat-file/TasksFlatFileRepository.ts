@@ -1,5 +1,5 @@
-import { ITasksRepository } from "../use-cases/data-access/ITasksRepository";
-import { Task } from "../entities/Task";
+import { ITasksRepository } from '../../core/use-cases/data-access/ITasksRepository';
+import { Task } from '../../core/entities/Task';
 import fs from 'fs';
 import path from 'path';
 
@@ -10,7 +10,7 @@ interface SimpleTaskDto {
     Order: number
 }
 
-export class TasksFileRepository implements ITasksRepository {
+export class TasksFlatFileRepository implements ITasksRepository {
     private filepath = path.join(__dirname, '../../../data/tasks.json');;
     private tasks: Task[] = [];
 

@@ -1,6 +1,6 @@
 import * as rl from 'readline-sync';
 
-import { DependencyInjector } from '../../core/dependency-injector/DependencyInjector';
+import { DependencyInjector } from './dependency-injector/DependencyInjector';
 
 let keepGoing = true;
 

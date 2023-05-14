@@ -1,8 +1,8 @@
-import { IAddTaskOutputBoundary } from "../../use-cases/add-task/IAddTaskOutputBoundary";
-import { IDeleteTaskOutputBoundary } from "../../use-cases/delete-task/IDeleteTaskOutputBoundary";
-import { IEditTaskOutputBoundary } from "../../use-cases/edit-task/IEditTaskOutputBoundary";
-import { ILoadTasksOutputBoundary } from "../../use-cases/load-tasks/ILoadTasksOutputBoundary";
-import { TaskOutputDto } from "../../use-cases/models/TaskOutputDto";
+import { IAddTaskOutputBoundary } from "../../../../core/use-cases/add-task/IAddTaskOutputBoundary";
+import { IDeleteTaskOutputBoundary } from "../../../../core/use-cases/delete-task/IDeleteTaskOutputBoundary";
+import { IEditTaskOutputBoundary } from "../../../../core/use-cases/edit-task/IEditTaskOutputBoundary";
+import { ILoadTasksOutputBoundary } from "../../../../core/use-cases/load-tasks/ILoadTasksOutputBoundary";
+import { TaskOutputDto } from "../../../../core/use-cases/models/TaskOutputDto";
 import { TaskViewModel } from "../view-models/TaskViewModel";
 
 export class TasksPresenter implements ILoadTasksOutputBoundary,
