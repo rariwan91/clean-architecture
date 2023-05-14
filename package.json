@@ -7,7 +7,7 @@
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
     "build": "tsc",
-    "postbuild": "copyfiles -u 1 src/**/*.pug src/**/*.json dist/",
+    "postbuild": "copyfiles -u 1 src/**/*.pug dist/",
     "start-web": "npm run build && node dist/apps/web-server/index.js",
     "start-console": "npm run build && node dist/apps/console-app/index.js",
     "run-console": "node dist/apps/console-app/index.js"

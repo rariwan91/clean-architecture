@@ -69,6 +69,8 @@ function deleteTask(): void {
     console.log(`task number: ${taskNumber}`);
 
     let taskId = parseInt(taskNumber);
+
+    tasksController.deleteTask(taskId);
 }
 
 function moveTask(): void {

@@ -4,4 +4,5 @@ export interface ITasksRepository {
     getTasks(): Array<Task>;
     addTask(newTask: Task): void;
     editTask(taskId: number, newTaskValue: string): void;
+    deleteTask(taskId: number): void;
 }
