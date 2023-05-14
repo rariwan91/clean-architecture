@@ -1,16 +1,20 @@
 `package.json` dependencies
 
 ```json
-"devDependencies": {
-    "@types/express": "^4.17.17",
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.0.1",
+    "@angular/cli": "^16.0.1",
     "@types/readline-sync": "^1.4.4",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "pug": "^3.0.2",
+    "@angular/core": "^16.0.1",
+    "@angular/forms": "^16.0.1",
+    "@angular/platform-browser": "^16.0.1",
+    "@angular/platform-browser-dynamic": "^16.0.1",
+    "@angular/router": "^16.0.1",
     "readline-sync": "^1.4.10"
   }
 ```
@@ -19,8 +23,6 @@
 
 `copyfiles` - used to copy non ts / js files over to dist after a build.
 
-`express` and `@types/express` - node web server and routing solution.
-
-`pug` - view templating engine for `express`.
-
 `readline-sync` and `@types/readline-sync` - same as built-in readline but synchronous rather than asynchronous. Used to pause the console app while waiting on user input.
+
+`@angular/core`, `@angular/forms`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/router`, `@angular-devkit/build-angular`, `@angular/cli` - Seems like the bare minimum needed to get an angular app working and deploying and loading.

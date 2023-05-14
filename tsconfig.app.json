@@ -1,0 +1,14 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "./dist/apps/angular-app/"
+    },
+    "files": [
+      "src/apps/angular-app/main.ts"
+    ],
+    "angularCompilerOptions": {
+      "strictTemplates": true
+    }
+  }
+  
