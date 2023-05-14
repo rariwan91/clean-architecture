@@ -9,8 +9,8 @@ export class AddTaskUseCaseInteractor implements IAddTaskInputBoundary {
         private tasksRepository: ITasksRepository,
         private addTaskOutputBoundary: IAddTaskOutputBoundary) { }
 
-    addTask(newTask: string): void {
-        this.tasksRepository.addTask(new Task(newTask));
+    addTask(newTaskValue: string): void {
+        this.tasksRepository.addTask(new Task(newTaskValue));
         let tasks = this.tasksRepository.getTasks();
         let results = tasks.map((task) => new TaskOutputDto(task.TaskId, task.Text, task.IsComplete, task.Order));
         this.addTaskOutputBoundary.showTasks(results);

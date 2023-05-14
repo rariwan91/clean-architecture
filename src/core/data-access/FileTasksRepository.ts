@@ -62,6 +62,31 @@ export class TasksFileRepository implements ITasksRepository {
         this.saveTasks();
     }
 
+    moveTask(taskId: number, direction: 'Up' | 'Down'): void {
+        let doesTaskExist = this.tasks.some((task) => task.TaskId === taskId);
+
+        if (!doesTaskExist) {
+            throw new Error(`TaskId ${taskId} doesn't exist.`);
+        }
+
+        let taskIndex = this.tasks.findIndex((task) => task.TaskId === taskId);
+        let otherIndex = taskIndex + 1;
+
+        if (direction === 'Up') {
+            otherIndex = taskIndex - 1;
+        }
+
+        let tempOrder = this.tasks[taskIndex].Order;
+        this.tasks[taskIndex].Order = this.tasks[otherIndex].Order;
+        this.tasks[otherIndex].Order = tempOrder;
+
+        this.saveTasks();
+    }
+
+    /**
+     * Load tasks from the data/tasks.json file.
+     * Creates the file if it doesn't exist.
+     */
     private loadTasks(): void {
         if (!fs.existsSync(this.filepath)) {
             this.createInitialTasks();
@@ -79,6 +104,10 @@ export class TasksFileRepository implements ITasksRepository {
         }
     }
 
+    /**
+     * Creates initial tasks values when the
+     * data/tasks.json file doesn't exist.
+     */
     private createInitialTasks(): void {
         this.tasks = [
             new Task('Task 1'),
@@ -99,6 +128,9 @@ export class TasksFileRepository implements ITasksRepository {
         this.saveTasks();
     }
 
+    /**
+     * Saves the current tasks to the data/tasks.json file.
+     */
     private saveTasks(): void {
         const simplifiedTasks: SimpleTaskDto[] = [];
 

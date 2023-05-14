@@ -1,7 +1,7 @@
 export interface IDeleteTaskInputBoundary {
     /**
      * Call this to remove a task from the list.
-     * @param newTask 
+     * @param taskId 
      */
     deleteTask(taskId: number): void;
 }

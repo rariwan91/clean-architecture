@@ -75,12 +75,11 @@ function deleteTask(): void {
 
 function moveTask(): void {
     let taskNumber = rl.question('Which task number? ');
-    console.log(`task number: ${taskNumber}`);
-
-    let direction = rl.question('[U]p or [D]own? ');
-    console.log(`direction: ${direction}`);
+    let direction = getDirection();
 
     let taskId = parseInt(taskNumber);
+
+    tasksController.moveTask(taskId, direction);
 }
 
 function toggleTaskCompletion(): void {
@@ -88,4 +87,18 @@ function toggleTaskCompletion(): void {
     console.log(`task number: ${taskNumber}`);
 
     let taskId = parseInt(taskNumber);
+}
+
+function getDirection(): 'Up' | 'Down' {
+    let answer = rl.question('[U]p or [D]own? ');
+
+    if (answer.charAt(0).toLowerCase() == 'u') {
+        return 'Up';
+    }
+
+    if (answer.charAt(0).toLowerCase() == 'd') {
+        return 'Down';
+    }
+
+    return getDirection();
 }
