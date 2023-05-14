@@ -8,7 +8,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'To-Do List', message: 'Test message' });
+    res.render('index', {
+        tasks: ['Task 1', 'Task 2']
+    });
 });
 
 app.listen(port, () => {
