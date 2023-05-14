@@ -11,22 +11,11 @@ interface SimpleTaskDto {
 }
 
 export class TasksFileRepository implements ITasksRepository {
+    private filepath = path.join(__dirname, '../../../data/tasks.json');;
     private tasks: Task[] = [];
 
     constructor() {
-        let tasks: Task[] = [];
-
-        let tasksFromFile: SimpleTaskDto[] = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../data/tasks.json'), 'utf-8'));
-
-        tasksFromFile.forEach(taskFromFile => {
-            let newTask = new Task(taskFromFile.Text);
-            newTask.TaskId = taskFromFile.TaskId;
-            newTask.IsComplete = taskFromFile.IsComplete;
-            newTask.Order = taskFromFile.Order;
-            tasks.push(newTask);
-        });
-
-        this.tasks = tasks;
+        this.loadTasks();
     }
 
     getTasks(): Task[] {
@@ -69,6 +58,43 @@ export class TasksFileRepository implements ITasksRepository {
         let taskIndex = this.tasks.findIndex((task) => task.TaskId === taskId);
 
         this.tasks.splice(taskIndex, 1);
+
+        this.saveTasks();
+    }
+
+    private loadTasks(): void {
+        if (!fs.existsSync(this.filepath)) {
+            this.createInitialTasks();
+        }
+        else {
+            let tasksFromFile: SimpleTaskDto[] = JSON.parse(fs.readFileSync(this.filepath, 'utf-8'));
+
+            tasksFromFile.forEach(taskFromFile => {
+                let newTask = new Task(taskFromFile.Text);
+                newTask.TaskId = taskFromFile.TaskId;
+                newTask.IsComplete = taskFromFile.IsComplete;
+                newTask.Order = taskFromFile.Order;
+                this.tasks.push(newTask);
+            });
+        }
+    }
+
+    private createInitialTasks(): void {
+        this.tasks = [
+            new Task('Task 1'),
+            new Task('Task 2'),
+            new Task('Task 3')
+        ];
+
+        this.tasks[0].TaskId = 1;
+        this.tasks[0].Order = 1;
+
+        this.tasks[1].TaskId = 2;
+        this.tasks[1].Order = 3;
+
+        this.tasks[2].TaskId = 3;
+        this.tasks[2].Order = 2;
+        this.tasks[2].IsComplete = true;
 
         this.saveTasks();
     }
