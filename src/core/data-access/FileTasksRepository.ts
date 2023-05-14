@@ -34,6 +34,23 @@ export class TasksFileRepository implements ITasksRepository {
 
         this.tasks.push(newTask);
 
+        this.saveTasks();
+    }
+
+    editTask(taskId: number, newTaskValue: string): void {
+        let doesTaskExist = this.tasks.some((task) => task.TaskId === taskId);
+
+        if (!doesTaskExist) {
+            throw new Error(`TaskId ${taskId} doesn't exist.`);
+        }
+
+        let taskToEdit = this.tasks.filter((task) => task.TaskId === taskId)[0];
+        taskToEdit.Text = newTaskValue;
+
+        this.saveTasks();
+    }
+
+    private saveTasks(): void {
         const simplifiedTasks: SimpleTaskDto[] = [];
 
         this.tasks.forEach(task => {

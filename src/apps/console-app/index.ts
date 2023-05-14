@@ -16,6 +16,7 @@ while (keepGoing) {
     console.log('[E]dit existing task');
     console.log('[D]elete existing task');
     console.log('[M]ove existing task up/down one spot');
+    console.log('[T]oggle existing task completion');
     console.log('[Q]uit the application');
     console.log();
 
@@ -35,6 +36,9 @@ while (keepGoing) {
             case 'm':
                 moveTask();
                 continue;
+            case 't':
+                toggleTaskCompletion();
+                continue;
             default:
                 keepGoing = false;
                 break;
@@ -53,15 +57,18 @@ function addTask(): void {
 
 function editTask(): void {
     let taskNumber = rl.question('Which task number? ');
-    console.log(`task number: ${taskNumber}`);
-
     let newTaskValue = rl.question('Enter new task value: ');
-    console.log(`newTaskValue: ${newTaskValue}`);
+
+    let taskId = parseInt(taskNumber);
+
+    tasksController.editTask(taskId, newTaskValue);
 }
 
 function deleteTask(): void {
     let taskNumber = rl.question('Which task number? ');
     console.log(`task number: ${taskNumber}`);
+
+    let taskId = parseInt(taskNumber);
 }
 
 function moveTask(): void {
@@ -70,4 +77,13 @@ function moveTask(): void {
 
     let direction = rl.question('[U]p or [D]own? ');
     console.log(`direction: ${direction}`);
+
+    let taskId = parseInt(taskNumber);
+}
+
+function toggleTaskCompletion(): void {
+    let taskNumber = rl.question('Which task number? ');
+    console.log(`task number: ${taskNumber}`);
+
+    let taskId = parseInt(taskNumber);
 }

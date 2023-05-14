@@ -1,9 +1,10 @@
 import { IAddTaskOutputBoundary } from "../../use-cases/add-task/IAddTaskOutputBoundary";
+import { IEditTaskOutputBoundary } from "../../use-cases/edit-task/IEditTaskOutputBoundary";
 import { ILoadTasksOutputBoundary } from "../../use-cases/load-tasks/ILoadTasksOutputBoundary";
 import { TaskOutputDto } from "../../use-cases/models/TaskOutputDto";
 import { TaskViewModel } from "../view-models/TaskViewModel";
 
-export class TasksPresenter implements ILoadTasksOutputBoundary, IAddTaskOutputBoundary {
+export class TasksPresenter implements ILoadTasksOutputBoundary, IAddTaskOutputBoundary, IEditTaskOutputBoundary {
     showTasks(tasks: TaskOutputDto[]): void {
         let results = tasks.map((task) => new TaskViewModel(task.TaskId, task.Text, task.IsComplete, task.Order));
         console.clear();
