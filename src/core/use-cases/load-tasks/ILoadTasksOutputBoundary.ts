@@ -6,5 +6,5 @@ export interface ILoadTasksOutputBoundary {
      * to render them to the screen.
      * @param tasks 
      */
-    showTasks(tasks: Array<TaskOutputDto>): void;
+    showTasks(tasks: TaskOutputDto[]): void;
 }

@@ -9,7 +9,7 @@ export class ToDoListService {
     constructor(private http: HttpClient){}
 
     loadTasksAsync(): Observable<TaskDto[]> {
-        return this.http.get<TaskDto[]>('http://localhost:3000/loadTasks')
+        return this.http.get<TaskDto[]>('http://localhost:3000/tasks/loadTasks')
         .pipe(catchError((err) => []));
     }
 }

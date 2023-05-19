@@ -1,35 +1,20 @@
+import { DependencyInjector } from './dependency-injector/DependencyInjector';
 import cors from 'cors';
 import express from 'express';
+import morgan from 'morgan';
 
+const port = 3000;
 const app = express();
+
+// Use "dependency injection" so I don't have to set all this stuff up here.
+const dependencyInjector = new DependencyInjector();
+const tasksApiController = dependencyInjector.tasksApiController;
+
+app.use(morgan('common'));
 app.use(cors({
     origin: 'http://localhost:4200'
 }));
-
-const port = 3000;
-
-app.get('/loadTasks', (req, res) => {
-    res.send([
-        {
-            TaskId: 1,
-            Text: 'Task 1',
-            IsComplete: false,
-            Order: 1
-        },
-        {
-            TaskId: 2,
-            Text: 'Task 2',
-            IsComplete: true,
-            Order: 2
-        },
-        {
-            TaskId: 3,
-            Text: 'Task 3',
-            IsComplete: false,
-            Order: 3
-        }
-    ]);
-});
+app.use('/tasks', tasksApiController.router);
 
 app.listen(port, () => {
     console.log(`web api listening on http://localhost:${port}`);
