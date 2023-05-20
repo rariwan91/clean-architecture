@@ -106,6 +106,8 @@ function getDirection(): 'Up' | 'Down' {
 }
 
 function showTasks(): void {
+    tasksController.loadTasks();
+
     console.clear();
     console.log('To-Do List Application');
     console.log();
