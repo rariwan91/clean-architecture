@@ -1,7 +1,7 @@
-import { ITasksRepository } from "../data-access/ITasksRepository";
+import { ITasksRepository } from "../../data-access/ITasksRepository";
 import { IToggleTaskCompletionInputBoundary } from "./IToggleTaskCompletionInputBoundary";
 import { IToggleTaskCompletionOutputBoundary } from "./IToggleTaskCompletionOutputBoundary";
-import { TaskOutputDto } from "../models/TaskOutputDto";
+import { TaskOutputDto } from "../../models/TaskOutputDto";
 
 export class ToggleTaskCompletionUseCaseInteractor implements IToggleTaskCompletionInputBoundary {
     constructor(
@@ -12,6 +12,6 @@ export class ToggleTaskCompletionUseCaseInteractor implements IToggleTaskComplet
         this.tasksRepository.toggleTaskCompletion(taskId);
         let tasks = this.tasksRepository.getTasks();
         let results = tasks.map((task) => new TaskOutputDto(task.TaskId, task.Text, task.IsComplete, task.Order));
-        this.toggleTaskCompletionOutputBoundary.showTasks(results);
+        this.toggleTaskCompletionOutputBoundary.taskCompletionToggled(results);
     }
 }

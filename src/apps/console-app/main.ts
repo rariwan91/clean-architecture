@@ -7,9 +7,10 @@ let keepGoing = true;
 const dependencyInjector = new DependencyInjector();
 
 const tasksController = dependencyInjector.tasksController;
+const taskPresenter = dependencyInjector.tasksPresenter;
 
 while (keepGoing) {
-    tasksController.loadTasks();
+    showTasks();
 
     console.log();
     console.log('[A]dd new task');
@@ -102,4 +103,22 @@ function getDirection(): 'Up' | 'Down' {
     }
 
     return getDirection();
+}
+
+function showTasks(): void {
+    console.clear();
+    console.log('To-Do List Application');
+    console.log();
+
+    taskPresenter.tasks.forEach(task => {
+        let line = `[${task.TaskId}] - ${task.Text}`;
+        if (task.IsComplete) {
+            line = "\u2714 " + line;
+        }
+        else {
+            line = "\u2717 " + line;
+        }
+
+        console.log(line);
+    });
 }

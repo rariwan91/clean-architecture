@@ -1,10 +1,10 @@
-import { TaskOutputDto } from "../models/TaskOutputDto";
+import { TaskOutputDto } from "../../models/TaskOutputDto";
 
 export interface IToggleTaskCompletionOutputBoundary {
     /**
      * Once the task's completion has been toggled, this gets called
-     * to render the newly updated list of tasks to the screen.
+     * with the newly updated list of tasks
      * @param tasks 
      */
-    showTasks(tasks: Array<TaskOutputDto>): void;
+    taskCompletionToggled(tasks: TaskOutputDto[]): void;
 }

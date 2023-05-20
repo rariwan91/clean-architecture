@@ -1,10 +1,10 @@
-import { TaskOutputDto } from "../models/TaskOutputDto";
+import { TaskOutputDto } from "../../models/TaskOutputDto";
 
 export interface ILoadTasksOutputBoundary {
     /**
-     * Once the tasks are done loading, this gets called
-     * to render them to the screen.
+     * Once the tasks are done this gets called to convert them
+     * into view models.
      * @param tasks 
      */
-    showTasks(tasks: TaskOutputDto[]): void;
+    tasksLoaded(tasks: TaskOutputDto[]): void;
 }

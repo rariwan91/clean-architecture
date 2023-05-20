@@ -1,7 +1,72 @@
-<h1>To-Do List Application</h1>
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                To-Do List Application
+            </div>
 
-<ul>
-    <li *ngFor="let task of tasks" [ngClass]="task.IsComplete ? 'strikethrough' : ''">
-        {{ task.Text }}
-    </li>
-</ul>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <ul class="list-group list-group-flush">
+                            <li *ngFor="let task of tasks" class="list-group-item">
+                                <s *ngIf="task.IsComplete; else elseBlock">{{task.Text}}</s>
+                                <ng-template #elseBlock>{{ task.Text }}</ng-template>
+
+                                &nbsp;
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal" (click)="setEditTaskId(task.TaskId)">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button type="button" class="btn-close float-end" (click)="deleteTask(task.TaskId)"></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewTaskModal">
+                    Add New Task
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addNewTaskModal" tabindex="-1" aria-labelledby="addNewTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="newTaskValue" class="form-label">New Task:</label>
+                <input type="text" class="form-control" id="newTaskValue" [(ngModel)]="newTaskValue"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addTask()" data-bs-toggle="modal" data-bs-target="#addNewTaskModal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="edittedTaskValue" class="form-label">Task:</label>
+                <input type="text" class="form-control" id="edittedTaskValue" [(ngModel)]="edittedTaskValue"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="editTask()" data-bs-toggle="modal" data-bs-target="#editTaskModal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

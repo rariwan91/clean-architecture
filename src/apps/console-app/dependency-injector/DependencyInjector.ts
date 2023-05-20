@@ -11,17 +11,18 @@ import { ILoadTasksInputBoundary } from "../../../core/use-cases/load-tasks/ILoa
 import { ILoadTasksOutputBoundary } from "../../../core/use-cases/load-tasks/ILoadTasksOutputBoundary";
 import { IMoveTaskInputBoundary } from "../../../core/use-cases/move-task/IMoveTaskInputBoundary";
 import { IMoveTaskOutputBoundary } from "../../../core/use-cases/move-task/IMoveTaskOutputBoundary";
-import { ITasksRepository } from "../../../core/use-cases/data-access/ITasksRepository";
+import { ITasksRepository } from "../../../core/data-access/ITasksRepository";
 import { IToggleTaskCompletionInputBoundary } from "../../../core/use-cases/toggle-task-completion/IToggleTaskCompletionInputBoundary";
 import { IToggleTaskCompletionOutputBoundary } from "../../../core/use-cases/toggle-task-completion/IToggleTaskCompletionOutputBoundary";
 import { LoadTasksUseCaseInteractor } from "../../../core/use-cases/load-tasks/LoadTasksUseCaseInteractor";
 import { MoveTaskUseCaseInteractor } from "../../../core/use-cases/move-task/MoveTaskUseCaseInteractor";
-import { TasksController } from "../ui-adapters/controllers/TasksController";
+import { TasksController } from "../console-adapters/controllers/TasksController";
 import { TasksFlatFileRepository } from "../../../data-access/flat-file/TasksFlatFileRepository";
-import { TasksPresenter } from "../ui-adapters/presenters/TasksPresenter";
+import { TasksPresenter } from "../console-adapters/presenters/TasksPresenter";
 import { ToggleTaskCompletionUseCaseInteractor } from "../../../core/use-cases/toggle-task-completion/ToggleTaskCompletionUseCaseInteractor";
 
 export class DependencyInjector {
+    // Back-End Dependencies
     // Input Boundaries
     loadTasksInputBoundary: ILoadTasksInputBoundary;
     addTaskInputBoundary: IAddTaskInputBoundary;
@@ -41,19 +42,23 @@ export class DependencyInjector {
     // Repositories
     tasksRepository: ITasksRepository;
 
-    // Controllers
+    // Front-End Dependencies
+    // UI Controllers
     tasksController: TasksController;
+
+    // UI Presenters
+    tasksPresenter: TasksPresenter;
 
     constructor() {
         this.tasksRepository = new TasksFlatFileRepository();
 
-        const tasksPresenter = new TasksPresenter();
-        this.loadTasksOutputBoundary = tasksPresenter;
-        this.addTaskOutputBoundary = tasksPresenter;
-        this.editTaskOutputBoundary = tasksPresenter;
-        this.deleteTaskOutputBoundary = tasksPresenter;
-        this.moveTaskOutputBoundary = tasksPresenter;
-        this.toggleTaskCompletionOutputBoundary = tasksPresenter;
+        this.tasksPresenter = new TasksPresenter();
+        this.loadTasksOutputBoundary = this.tasksPresenter;
+        this.addTaskOutputBoundary = this.tasksPresenter;
+        this.editTaskOutputBoundary = this.tasksPresenter;
+        this.deleteTaskOutputBoundary = this.tasksPresenter;
+        this.moveTaskOutputBoundary = this.tasksPresenter;
+        this.toggleTaskCompletionOutputBoundary = this.tasksPresenter;
 
         this.loadTasksInputBoundary = new LoadTasksUseCaseInteractor(this.tasksRepository, this.loadTasksOutputBoundary);
         this.addTaskInputBoundary = new AddTaskUseCaseInteractor(this.tasksRepository, this.addTaskOutputBoundary);

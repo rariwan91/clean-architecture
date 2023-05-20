@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+
 import { TaskDto } from "../view-models/TaskDto";
 import { ToDoListService } from "./to-do-list.service";
 
@@ -9,12 +10,42 @@ import { ToDoListService } from "./to-do-list.service";
     styleUrls: ["./to-do-list.component.scss"]
 })
 export class ToDoListComponent {
+    @Input() newTaskValue: string = '';
+
+    editTaskId: number | null = null;
+    @Input() edittedTaskValue: string = '';
+
     tasks: TaskDto[] = [];
 
-    constructor(private toDoListService: ToDoListService){}
+    constructor(private toDoListService: ToDoListService) { }
 
     ngOnInit(): void {
         this.getTasks();
+    }
+
+    addTask(): void {
+        let self = this;
+
+        this.toDoListService.addTaskAsync(this.newTaskValue)
+            .subscribe(() => self.getTasks());
+    }
+
+    deleteTask(taskId: number): void {
+        let self = this;
+
+        this.toDoListService.deleteTaskAsync(taskId)
+            .subscribe(() => self.getTasks());
+    }
+
+    setEditTaskId(taskId: number): void {
+        this.editTaskId = taskId;
+        this.edittedTaskValue = this.tasks.filter((task) => task.TaskId == taskId)[0].Text;
+    }
+
+    editTask(): void {
+        let self = this;
+        this.toDoListService.editTaskAsync(self.editTaskId!, self.edittedTaskValue)
+            .subscribe(() => self.getTasks());
     }
 
     getTasks(): void {

@@ -1,8 +1,9 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 
@@ -11,6 +12,7 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forRoot([
             { path: '', component: ToDoListComponent },
         ])

@@ -1,4 +1,4 @@
-import { ITasksRepository } from '../../core/use-cases/data-access/ITasksRepository';
+import { ITasksRepository } from '../../core/data-access/ITasksRepository';
 import { Task } from '../../core/entities/Task';
 import fs from 'fs';
 import path from 'path';
