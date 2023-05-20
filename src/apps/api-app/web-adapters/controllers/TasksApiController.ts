@@ -41,13 +41,12 @@ export class TasksApiController {
             res.send(this.tasksPresenter.tasks);
         });
 
-        this.router.get('/moveTask', (req, res) => {
-            console.dir(req);
+        this.router.post('/moveTask', (req, res) => {
             this.moveTaskInputBoundary.moveTask(req.body.taskId, req.body.direction);
             res.send(this.tasksPresenter.tasks);
         });
 
-        this.router.get('/toggleTaskCompletion', (req, res) => {
+        this.router.post('/toggleTaskCompletion', (req, res) => {
             this.toggleTaskCompletionInputBoundary.toggleTaskCompletion(req.body.taskId);
             res.send(this.tasksPresenter.tasks);
         });

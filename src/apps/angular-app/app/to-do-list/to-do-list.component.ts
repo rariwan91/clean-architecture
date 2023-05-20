@@ -37,7 +37,7 @@ export class ToDoListComponent {
             .subscribe(() => self.getTasks());
     }
 
-    setEditTaskId(taskId: number): void {
+    setEdittedTask(taskId: number): void {
         this.editTaskId = taskId;
         this.edittedTaskValue = this.tasks.filter((task) => task.TaskId == taskId)[0].Text;
     }
@@ -50,6 +50,16 @@ export class ToDoListComponent {
 
     getTasks(): void {
         this.toDoListService.loadTasksAsync()
+            .subscribe(tasks => this.tasks = tasks);
+    }
+
+    moveTask(taskId: number, direction: 'Up' | 'Down'): void {
+        this.toDoListService.moveTaskAsync(taskId, direction)
+            .subscribe(tasks => this.tasks = tasks);
+    }
+
+    toggleTaskCompletion(taskId: number): void {
+        this.toDoListService.toggleTaskCompletionAsync(taskId)
             .subscribe(tasks => this.tasks = tasks);
     }
 }

@@ -1,23 +1,50 @@
+<h1 class="mb-3 mt-3">To-Do List Application</h1>
+
 <div class="row">
-    <div class="col-4">
+    <div class="col">
         <div class="card">
             <div class="card-header">
-                To-Do List Application
+                To-Do List
             </div>
 
             <div class="card-body">
                 <div class="row">
                     <div class="col">
                         <ul class="list-group list-group-flush">
-                            <li *ngFor="let task of tasks" class="list-group-item">
-                                <s *ngIf="task.IsComplete; else elseBlock">{{task.Text}}</s>
-                                <ng-template #elseBlock>{{ task.Text }}</ng-template>
+                            <li *ngFor="let task of tasks; let index = index" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="checkbox" class="form-check-input me-1" id="checkbox-{{index}}" (change)="toggleTaskCompletion(task.TaskId)" [(ngModel)]="task.IsComplete" />
+                                        &nbsp;
+                                        <label class="form-check-label" for="checkbox-{{index}}">
+                                            <s *ngIf="task.IsComplete; else elseBlock">{{task.Text}}</s>
+                                            <ng-template #elseBlock>{{ task.Text }}</ng-template>
+                                        </label>
+                                    </div>
 
-                                &nbsp;
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal" (click)="setEditTaskId(task.TaskId)">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                                <button type="button" class="btn-close float-end" (click)="deleteTask(task.TaskId)"></button>
+                                    <div class="col-6 text-end">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#editTaskModal" (click)="setEdittedTask(task.TaskId)">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#moveTaskUp" (click)="moveTask(task.TaskId, 'Up')"
+                                            [disabled]="!(index > 0)">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#moveTaskUp" (click)="moveTask(task.TaskId, 'Down')"
+                                            [disabled]="!(index < (tasks.length - 1))">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-danger" (click)="deleteTask(task.TaskId)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -42,11 +69,12 @@
             </div>
             <div class="modal-body">
                 <label for="newTaskValue" class="form-label">New Task:</label>
-                <input type="text" class="form-control" id="newTaskValue" [(ngModel)]="newTaskValue"/>
+                <input type="text" class="form-control" id="newTaskValue" [(ngModel)]="newTaskValue" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addTask()" data-bs-toggle="modal" data-bs-target="#addNewTaskModal">Add</button>
+                <button type="button" class="btn btn-primary" (click)="addTask()" data-bs-toggle="modal"
+                    data-bs-target="#addNewTaskModal">Add</button>
             </div>
         </div>
     </div>
@@ -61,11 +89,12 @@
             </div>
             <div class="modal-body">
                 <label for="edittedTaskValue" class="form-label">Task:</label>
-                <input type="text" class="form-control" id="edittedTaskValue" [(ngModel)]="edittedTaskValue"/>
+                <input type="text" class="form-control" id="edittedTaskValue" [(ngModel)]="edittedTaskValue" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="editTask()" data-bs-toggle="modal" data-bs-target="#editTaskModal">Save</button>
+                <button type="button" class="btn btn-primary" (click)="editTask()" data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal">Save</button>
             </div>
         </div>
     </div>
